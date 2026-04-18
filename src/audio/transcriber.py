@@ -1,18 +1,24 @@
 import os
 
-WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "mlx")
+WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "faster")
 
 def transcribe(audio_path: str) -> str:
-    print(f"[Transcriber] Backend: {WHISPER_BACKEND} | Fichier: {audio_path}")
-    
+    print(f"[Transcriber] Backend: {WHISPER_BACKEND}")
+    print(f"[Transcriber] Fichier : {audio_path}")
+
+    if not os.path.exists(audio_path):
+        raise FileNotFoundError(f"Fichier audio introuvable : {audio_path}")
+
     if WHISPER_BACKEND == "mlx":
         import mlx_whisper
         result = mlx_whisper.transcribe(
             audio_path,
             path_or_hf_repo="mlx-community/whisper-base"
         )
-        return result["text"]
+        return result["text"].strip()
+
     else:
-        import whisper
-        model = whisper.load_model("base")
-        return model.transcribe(audio_path)["text"]
+        from faster_whisper import WhisperModel
+        model = WhisperModel("base", device="cpu", compute_type="int8")
+        segments, _ = model.transcribe(audio_path)
+        return " ".join([seg.text for seg in segments]).strip()
