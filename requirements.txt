@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+google-generativeai
+mlx-whisper
+openai-whisper
+pydantic
+python-multipart
+python-dotenv
+weasyprint
+notion-client
