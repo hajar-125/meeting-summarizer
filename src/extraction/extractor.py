@@ -8,7 +8,7 @@ from extraction.schemas import MeetingSummary, Task
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-3-flash-preview"
 
 def extract(segments: list, summary: str) -> MeetingSummary:
     full_text = "\n".join([f"[Segment {s['segment_id']}] {s['text']}" for s in segments])

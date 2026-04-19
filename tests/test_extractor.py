@@ -28,3 +28,9 @@ print(f"\nTâches :")
 for t in result.tasks:
     print(f"  - {t.title} | Responsable: {t.owner} | Deadline: {t.deadline}")
 print(f"\nProchain meeting : {result.next_meeting}")
+
+from export.pdf_gen import generate_pdf
+
+print("\n=== EXPORT PDF ===")
+path = generate_pdf(result)
+print(f"PDF disponible : {path}")
