@@ -1,4 +1,3 @@
-"""Extract decisions, tasks, and responsible parties from meeting summary."""
 import os
 import json
 from google import genai
@@ -8,7 +7,7 @@ from extraction.schemas import MeetingSummary, Task
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-MODEL = "gemini-3-flash-preview"
+MODEL = "gemini-3.1-flash-lite-preview"
 
 def extract(segments: list, summary: str) -> MeetingSummary:
     full_text = "\n".join([f"[Segment {s['segment_id']}] {s['text']}" for s in segments])

@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-MODEL = "gemini-3-flash-preview"
+MODEL = "gemini-3.1-flash-lite-preview"
 
 def summarize(segments: list) -> str:
     full_text = "\n".join([f"[Segment {s['segment_id']}] {s['text']}" for s in segments])

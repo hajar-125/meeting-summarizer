@@ -1,10 +1,11 @@
 fastapi
 uvicorn[standard]
-google-generativeai
-mlx-whisper
-openai-whisper
-pydantic
-python-multipart
+streamlit
+google-genai
+faster-whisper
 python-dotenv
-weasyprint
+python-multipart
+pydantic
+fpdf2
 notion-client
+pandas

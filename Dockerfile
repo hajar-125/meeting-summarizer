@@ -2,13 +2,23 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# ffmpeg pour l'extraction audio
-RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    libffi-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
+COPY src/app.py .
 
-EXPOSE 8000
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+RUN mkdir -p uploads outputs
+
+# Script de démarrage
+COPY start.sh .
+RUN chmod +x start.sh
+
+EXPOSE 8000 8501
+
+CMD ["./start.sh"]

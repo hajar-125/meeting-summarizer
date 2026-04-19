@@ -1,8 +1,6 @@
 import os
 from datetime import datetime
 from fpdf import FPDF
-# Assure-toi que le chemin d'import correspond à ton architecture
-# from extraction.schemas import MeetingSummary 
 
 class PDF(FPDF):
     def header(self):
