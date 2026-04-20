@@ -4,3 +4,6 @@ __pycache__
 *.pyc
 uploads/
 outputs/
+n8n_data/
+*.log
+*.sqlite*
